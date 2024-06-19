@@ -13,15 +13,9 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
             $table->integer('dayplan')->default(1500);
             $table->date('date');
             $table->integer('target')->default(1200);
-=======
-            $table->integer('dayplan');
-            $table->date('day');
-            $table->integer('target');
->>>>>>> 0be400494de6b3677e925c5080b2fd63275149e6
             $table->timestamps();
         });
     }
