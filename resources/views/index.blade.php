@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -15,7 +16,9 @@
             <tr>
                 <th scope="col"><img src="logo.png" alt=""></th>
                 <th scope="col" class="text-center">E4 CID Line</th>
-                <th scope="col" class="text-center">Date / Time</th>
+                <th scope="col" class="text-center">Date / Time
+                    <br> {{$schedule->date}}
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -23,25 +26,25 @@
                 <td><div class=""><span>Model</span>
                     <h3>ABC</h3></div></td>
                 <td><div class=""><span>Day Plan</span>
-                    <h3>2,500</h3></div></td>
+                    <h3>{{$schedule->dayplan}}</h3></div></td>
                 <td><div class=""><span>Current Target</span>
-                    <h3>1,500</h3></div></td>
+                    <h3>{{$schedule->target}}</h3></div></td>
             </tr>
             <tr>
                 <td><div class=""><span>UPH</span>
                     <h3>14</h3></div></td>
                 <td><div class=""><span>Defect</span>
-                    <h3>10</h3></div></td>
+                    <h3 id="defect">{{$defect}}</h3></div></td>
                 <td><div class=""><span>Current Input</span>
-                    <h3>1,300</h3></div></td>
+                    <h3 id="current_input">{{$input}}</h3></div></td>
             </tr>
             <tr>
                 <td><div class=""><span>Defect Rate</span>
-                    <h3>0.8%</h3></div></td>
+                    <h3 id="defect">@php if($input) echo ($defect/$input)*100; else echo '0'; @endphp%</h3></div></td>
                 <td><div class=""><span>Progress (%)</span>
-                    <h3>52,0%</h3></div></td>
+                    <h3 id="progress">@php  echo ($input/$schedule->dayplan)*100;  @endphp%</h3></div></td>
                 <td><div class=""><span>Achieve (%)</span>
-                    <h3>86.7%</h3></div></td>
+                    <h3 id="achive">@php echo ($input/$schedule->target)*100;  @endphp%</h3></div></td>
             </tr>
         </tbody>
     </table>
