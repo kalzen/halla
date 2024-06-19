@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Models\Schedule;
 use App\Models\Stage;
 use Illuminate\Http\Request;
@@ -86,3 +87,11 @@ class HomeController extends Controller
 
 }
 
+=======
+use Illuminate\Http\Request;
+
+class HomeController extends Controller
+{
+    //
+}
+>>>>>>> 0be400494de6b3677e925c5080b2fd63275149e6

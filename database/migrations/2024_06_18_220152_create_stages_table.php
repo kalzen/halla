@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('schedule_id');
+<<<<<<< HEAD
             $table->integer('input')->default(0);
             $table->integer('defect')->default(0);
             $table->integer('status')->default(1);
+=======
+            $table->integer('input');
+            $table->integer('defect');
+>>>>>>> 0be400494de6b3677e925c5080b2fd63275149e6
             $table->timestamps();
         });
     }
