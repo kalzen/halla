@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/getmodel', [HomeController::class, 'getModel'])->name('getModel');
+Route::any('/data', [HomeController::class, 'getData'])->name('getData');

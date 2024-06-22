@@ -108,6 +108,30 @@ class HomeController extends Controller
         // }
         return response()->json($request);
     }
+    public function getData(Request $request)
+    {
+        // try {
+        //     $stage = $request->input('stage');
+        //     $modelName = $request->input('model');
 
+        //     $model = Model::where('stage', $stage)
+        //                  ->where('name', $modelName)
+        //                  ->first();
+
+        //     if ($model) {
+        //         // Update the stage of the model
+        //         $model->stage = 'Stage2';
+        //         $model->save();
+
+        //         return response()->json($model);
+        //     } else {
+        //         return response()->json(['error' => 'Model not found'], 404);
+        //     }
+        // } catch (\Exception $e) {
+        //     Log::error('Error in getModel: ' . $e->getMessage());
+        //     return response()->json(['error' => 'An error occurred while retrieving the model'], 500);
+        // }
+        return response()->json($request);
+    }
 }
 
