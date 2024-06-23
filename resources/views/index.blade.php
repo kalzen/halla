@@ -15,7 +15,7 @@
         <thead>
             <tr id="header">
                 <th scope="col"><img style="max-height: 20vw" src="{{asset('logo.jpg')}}" alt=""></th>
-                <th scope="col" class="text-center">E4 CID Line</th>
+                <th scope="col" class="text-center align-items-center h-100" style="font-size: 3vw"><div style="background: #fff;">E4 CID Line</div></th>
                 <th scope="col" class="text-center">Date / Time
                     <br> {{$schedule->date}}
                 </th>
@@ -85,13 +85,14 @@
         font-weight: bold;
         color: yellow !important;
         font-size: 2vw;
+        border-width: 2;
     }
     td
     {
     font-size: 6vw;
     color: white !important;
     font-weight: bold;
-    border-width: 1;
+    border-width: 2;
     }
     #header th
     {

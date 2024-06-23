@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $currentDate = date('Y-m-d');
-        $schedule = Schedule::where('date', $currentDate)->first();
+        $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
         if (!$schedule) {
             Log::error('No schedule found for the current date');
             return view('error', ['message' => 'No schedule found for the current date. Please add a new schedule.']);
@@ -32,7 +32,7 @@ class HomeController extends Controller
     public function stage(Request $request)
     {
         $currentDate = date('Y-m-d');
-        $schedule = Schedule::where('date', $currentDate)->first();
+        $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
 
         //$stages = $schedule->stages();
         $input = 0;
@@ -111,6 +111,33 @@ class HomeController extends Controller
     }
     public function getData(Request $request)
     {
+        $currentDate = date('Y-m-d');
+        $schedule = Schedule::where('date', $currentDate)->first();
+        for ($i = 0; $i++; $i<7)
+        {
+            if ($request[$i])
+            {
+                $stage = Stage::where('name', 'Stage'.$i)->where('schedule_id', $schedule->id);
+                $stage->defect = $stage->defect+1;
+                $stage->save();
+            }
+        }
+        for ($i=7; $i++; $i<10)
+        {
+            if ($request[$i])
+            {
+                $stage = Stage::where('name', 'Stage'.$i)->where('schedule_id', $schedule->id);
+                $stage->input = $stage->input+1;
+                $stage->save();
+            }
+        }
+        for ($i=10; $i++; $i<17)
+        {
+            $stage = Stage::where('name', 'Stage'.$i)->where('schedule_id', $schedule->id);
+            $stage->status = $request[$i];
+            $stage->save();
+            
+        }
         // try {
         //     $stage = $request->input('stage');
         //     $modelName = $request->input('model');
