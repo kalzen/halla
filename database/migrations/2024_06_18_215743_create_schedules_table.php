@@ -16,6 +16,8 @@ return new class extends Migration
             $table->integer('dayplan')->default(1500);
             $table->date('date');
             $table->integer('target')->default(1200);
+            $table->string('model')->nullable();
+            $table->string('uhp')->nullable();
             $table->timestamps();
         });
     }

@@ -9,22 +9,25 @@ use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
+
     public function index(Request $request)
     {
         $currentDate = date('Y-m-d');
         $schedule = Schedule::where('date', $currentDate)->first();
-
-        $stages = $schedule->stages();
+        if (!$schedule) {
+            Log::error('No schedule found for the current date');
+            return view('error', ['message' => 'No schedule found for the current date. Please add a new schedule.']);
+        }
+        $stages = $schedule->stages;
         $input = 0;
         $defect = 0;
         //dd($stages);
-        foreach ($stages as $stage)
-        {
+        foreach ($stages as $stage) {
             $input += $stage->input;
             $defect += $stage->defect;
         }
 
-        return view('index', compact('schedule','input', 'defect'));
+        return view('index', compact('schedule', 'input', 'defect'));
     }
     public function stage(Request $request)
     {
@@ -35,17 +38,15 @@ class HomeController extends Controller
         $input = 0;
         $defect = 0;
         //dd($stages);
-        foreach ($schedule->stages as $stage)
-        {
+        foreach ($schedule->stages as $stage) {
             $input += $stage->input;
             $defect += $stage->defect;
         }
         //return response()->json($schedule->stages);
-        if (isset($request->stage))
-        {
+        if (isset($request->stage)) {
             $stage = Stage::where('schedule_id', $schedule->id)->where('name', $request->stage);
         }
-        return view('stage', compact('schedule','input', 'defect', 'stage'));
+        return view('stage', compact('schedule', 'input', 'defect', 'stage'));
     }
     public function getRandomData()
     {
@@ -57,7 +58,7 @@ class HomeController extends Controller
             return response()->json(['error' => 'No schedule found for the current date'], 404);
         }
 
-        
+
         $input = 0;
         $defect = 0;
 
@@ -65,7 +66,7 @@ class HomeController extends Controller
             $rand = rand(0, 1);
             if ($rand == 0) {
                 $stage->defect++;
-            } 
+            }
             $stage->input++;
             $stage->status = $input;
             $stage->save();

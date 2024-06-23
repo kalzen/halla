@@ -1,5 +1,5 @@
 
-<html>
+<>
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -13,8 +13,8 @@
 
     <table class="table" border="1" id="table">
         <thead>
-            <tr>
-                <th scope="col"><img src="logo.png" alt=""></th>
+            <tr id="header">
+                <th scope="col"><img style="max-height: 20vw" src="{{asset('logo.jpg')}}" alt=""></th>
                 <th scope="col" class="text-center">E4 CID Line</th>
                 <th scope="col" class="text-center">Date / Time
                     <br> {{$schedule->date}}
@@ -23,28 +23,41 @@
         </thead>
         <tbody>
             <tr>
-                <td><div class=""><span>Model</span>
-                    <h3>ABC</h3></div></td>
-                <td><div class=""><span>Day Plan</span>
-                    <h3>{{$schedule->dayplan}}</h3></div></td>
-                <td><div class=""><span>Current Target</span>
-                    <h3>{{$schedule->target}}</h3></div></td>
+                <th><span>Model</span></th>
+                    
+                <th><span>Day Plan</span></th>
+                    
+                <th><span>Current Target</span></th>
+                
             </tr>
             <tr>
-                <td><div class=""><span>UPH</span>
-                    <h3>14</h3></div></td>
-                <td><div class=""><span>Defect</span>
-                    <h3 id="defect">{{$defect}}</h3></div></td>
-                <td><div class=""><span>Current Input</span>
-                    <h3 id="current_input">{{$input}}</h3></div></td>
-            </tr>
+                <td><span>{{$schedule->model}}</span></td>
+                <td><span>{{$schedule->dayplan}}</span></td>
+                   <td> <span>{{$schedule->target}}</span></td>
+                </tr>
+            <tr class="title">
+                <th><span>UPH</span></th>
+                    
+                <th><span>Defect</span></th>
+                    
+                <th><span>Current Input</span></th>
+                </tr>
+                <tr>
+                <td><span>{{$schedule->uhp}}</span></td>
+                <td><span id="defect">{{$defect}}</span></td>
+                    <td><span id="current_input">{{$input}}</span></td>
+                    </tr>
+            <tr class="title">
+                <th><span>Defect Rate</span></th>
+                    
+                <th><span>Progress (%)</span></th>
+                    
+                <th><span>Achieve (%)</span></th>
+                </tr>
             <tr>
-                <td><div class=""><span>Defect Rate</span>
-                    <h3 id="defect">@php if($input) echo ($defect/$input)*100; else echo '0'; @endphp%</h3></div></td>
-                <td><div class=""><span>Progress (%)</span>
-                    <h3 id="progress">@php  echo ($input/$schedule->dayplan)*100;  @endphp%</h3></div></td>
-                <td><div class=""><span>Achieve (%)</span>
-                    <h3 id="achive">@php echo ($input/$schedule->target)*100;  @endphp%</h3></div></td>
+            <td><span id="defect">@php if($input) echo ($defect/$input)*100; else echo '0'; @endphp%</span></td>
+            <td><span id="progress">@php  echo ($input/$schedule->dayplan)*100;  @endphp%</span></td>
+            <td><span id="achive">@php echo ($input/$schedule->target)*100;  @endphp%</span></td>
             </tr>
         </tbody>
     </table>
@@ -53,12 +66,39 @@
     #table
     {
         height: 100vh;
+    position: fixed;
+    top: 0;
     }
     #table tbody td
     {
         vertical-align: middle;
         text-align: center;
     }
+    body, #table *
+    {
+        background: #222;
+    }
+    th
+    {
+        height: 6vh;
+        text-align: center;
+        font-weight: bold;
+        color: yellow !important;
+        font-size: 2vw;
+    }
+    td
+    {
+    font-size: 6vw;
+    color: white !important;
+    font-weight: bold;
+    border-width: 1;
+    }
+    #header th
+    {
+    background: #fff;
+    color: #222 !important;
+    font-size: 2rem;
+    }
     
 </style>
-</html>
+</>
