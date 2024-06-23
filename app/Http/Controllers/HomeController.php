@@ -6,6 +6,7 @@ use App\Models\Schedule;
 use App\Models\Stage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use DB;
 
 class HomeController extends Controller
 {
@@ -129,55 +130,58 @@ class HomeController extends Controller
     }
     public function getData(Request $request)
     {
-        $currentDate = date('Y-m-d');
-        $schedule = Schedule::where('date', $currentDate)->first();
-        for ($i = 0; $i++; $i<7)
-        {
-            if ($request[$i])
-            {
-                $stage = Stage::where('name', 'Stage'.$i)->where('schedule_id', $schedule->id);
-                $stage->defect = $stage->defect+1;
-                $stage->save();
+        try {
+            $currentDate = date('Y-m-d');
+            $schedule = Schedule::where('date', $currentDate)->first();
+
+            if (!$schedule) {
+                Log::error('No schedule found for the current date.');
+                return response()->json(['error' => 'No schedule found for the current date.'], 404);
             }
-        }
-        for ($i=7; $i++; $i<10)
-        {
-            if ($request[$i])
-            {
-                $stage = Stage::where('name', 'Stage'.$i)->where('schedule_id', $schedule->id);
-                $stage->input = $stage->input+1;
-                $stage->save();
-            }
-        }
-        for ($i=10; $i++; $i<17)
-        {
-            $stage = Stage::where('name', 'Stage'.$i)->where('schedule_id', $schedule->id);
-            $stage->status = $request[$i];
-            $stage->save();
             
+            foreach ($request->all() as $index => $item) {
+                if ($index < 7) {
+                    if($item)
+                    {
+                    $stage = DB::table('stages')
+                        ->where('schedule_id', $schedule->id)
+                        ->where('name', 'Stage' . $index)
+                        ->increment('defect');
+                     //   return response()->json(['index' => $index, 'item'=> $item, 'schedule_id' => $schedule->id]);
+                    }
+                } elseif ($index < 10) {
+                    if($item)
+                    {
+                    $stage = DB::table('stages')
+                        ->where('schedule_id', $schedule->id)
+                        ->where('name', 'Stage' . $index)
+                        ->increment('input');
+                    }
+                } else {
+                    if ($item)
+                    {
+                    $stage = DB::table('stages')
+                        ->where('schedule_id', $schedule->id)
+                        ->where('name', 'Stage' . $index)
+                        ->update(['status' =>  1]);
+                    }
+                    else
+                    {
+                        $stage = DB::table('stages')
+                        ->where('schedule_id', $schedule->id)
+                        ->where('name', 'Stage' . $index)
+                        ->update(['status' =>  2]);
+                    }
+                        
+                }
+            }
+
+            return response()->json($request->all());
+        } catch (\Exception $e) {
+            Log::error('Error in getData function: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while processing the request.'], 500);
         }
-        // try {
-        //     $stage = $request->input('stage');
-        //     $modelName = $request->input('model');
-
-        //     $model = Model::where('stage', $stage)
-        //                  ->where('name', $modelName)
-        //                  ->first();
-
-        //     if ($model) {
-        //         // Update the stage of the model
-        //         $model->stage = 'Stage2';
-        //         $model->save();
-
-        //         return response()->json($model);
-        //     } else {
-        //         return response()->json(['error' => 'Model not found'], 404);
-        //     }
-        // } catch (\Exception $e) {
-        //     Log::error('Error in getModel: ' . $e->getMessage());
-        //     return response()->json(['error' => 'An error occurred while retrieving the model'], 500);
-        // }
-        return response()->json($request);
     }
+
 }
 
