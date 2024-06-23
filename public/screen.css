@@ -1,0 +1,38 @@
+#table
+    {
+        height: 100vh;
+    position: fixed;
+    top: 0;
+    }
+    #table tbody td
+    {
+        vertical-align: middle;
+        text-align: center;
+    }
+    body, #table *
+    {
+        background: #222;
+    }
+    th
+    {
+        height: 6vh;
+        text-align: center;
+        font-weight: bold;
+        color: yellow !important;
+        font-size: 2vw;
+        border-width: 2;
+    }
+    td
+    {
+    font-size: 6vw;
+    color: white !important;
+    font-weight: bold;
+    border-width: 2;
+    }
+    #header th
+    {
+    background: #fff;
+    color: #222 !important;
+    font-size: 2rem;
+    }
+    

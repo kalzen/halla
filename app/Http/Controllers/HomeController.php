@@ -48,41 +48,59 @@ class HomeController extends Controller
         }
         return view('stage', compact('schedule', 'input', 'defect', 'stage'));
     }
-    public function getRandomData()
+    function getDataStage($id)
     {
         $currentDate = date('Y-m-d');
-        $schedule = Schedule::where('date', $currentDate)->first();
+        $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
+        $current = Stage::find($id);
 
-        if (!$schedule) {
-            Log::error('No schedule found for the current date');
-            return response()->json(['error' => 'No schedule found for the current date'], 404);
-        }
-
-
+        //$stages = $schedule->stages();
         $input = 0;
         $defect = 0;
-
+        //dd($stages);
         foreach ($schedule->stages as $stage) {
-            $rand = rand(0, 1);
-            if ($rand == 0) {
-                $stage->defect++;
-            }
-            $stage->input++;
-            $stage->status = $input;
-            $stage->save();
             $input += $stage->input;
             $defect += $stage->defect;
         }
 
-        $data = [
+
+        $defect_rate = number_format(($current->input / $current->input+$current->input->defect) * 100, 2, '.', '') ;
+
+        $progress = number_format(($input/$schedule->dayplan)*100, 2, ',', '') ;
+        $achive = (number_format(($input / $schedule->target) * 100, 2, '.', '')) ;
+        return response()->json([
+            'input' => $current->input,
+            'defect' => $current->defect,
+            'progress' => $progress,
+            'defect_rate' => $defect_rate,
+            'achive' => $achive
+        ]);
+    }
+    function getDataSchedule()
+    {
+        $currentDate = date('Y-m-d');
+        $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
+
+        //$stages = $schedule->stages();
+        $input = 0;
+        $defect = 0;
+        //dd($stages);
+        foreach ($schedule->stages as $stage) {
+            $input += $stage->input;
+            $defect += $stage->defect;
+        }
+
+        $defect_rate = number_format(($defect / $input+$defect) * 100, 2, '.', '') ;
+
+        $progress = number_format(($input/$schedule->dayplan)*100, 2, ',', '') ;
+        $achive = (number_format(($input / $schedule->target) * 100, 2, '.', '')) ;
+        return response()->json([
             'input' => $input,
             'defect' => $defect,
-            'stages' => $schedule->stages,
-            'defect_rate' => $input > 0 ? number_format(($defect / $input) * 100, 2, '.', '') : 0,
-            'achieve' => number_format(($input / $schedule->target) * 100, 2, '.', ''),
-        ];
-
-        return response()->json($data);
+            'progress' => $progress,
+            'defect_rate' => $defect_rate,
+            'achive' => $achive
+        ]);
     }
     public function getModel(Request $request)
     {

@@ -8,8 +8,8 @@ use App\Http\Controllers\ScheduleController;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/stage/{stage}', [HomeController::class, 'stage'])->name('stage');
 Route::get('/random', [HomeController::class, 'randomInput'])->name('randomInput');
-Route::get('/random-data', [HomeController::class, 'getRandomData'])->name('random-data');
-
+Route::get('/getDataSchedule', [HomeController::class, 'getDataSchedule'])->name('getDataSchedule');
+Route::get('/getDataStage/{id}', [HomeController::class, 'getDataStage'])->name('getDataStage');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
