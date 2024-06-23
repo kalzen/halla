@@ -14,7 +14,7 @@ class HomeController extends Controller
         $currentDate = date('Y-m-d');
         $schedule = Schedule::where('date', $currentDate)->first();
 
-        $stages = $schedule->stages;
+        $stages = $schedule->stages();
         $input = 0;
         $defect = 0;
         //dd($stages);
