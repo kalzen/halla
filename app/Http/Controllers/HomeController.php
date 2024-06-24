@@ -65,10 +65,10 @@ class HomeController extends Controller
             $defect += $stage->defect;
         }
 
-        if ($current->input+$current->defect)        $defect_rate = number_format(($current->input / ($current->input+$current->defect)) * 100, 2, '.', '') ;
+        if ($current->input)        $defect_rate = number_format(($current->defect / ($current->input)) * 100, 2, '.', '') ;
         else $defect_rate = 0;
-        $progress = number_format(($input/$schedule->dayplan)*100, 2, ',', '') ;
-        $achive = (number_format(($input / $schedule->target) * 100, 2, '.', '')) ;
+        $progress = number_format(($current->input/$schedule->dayplan)*100, 2, ',', '') ;
+        $achive = (number_format(($current->input / $schedule->target) * 100, 2, '.', '')) ;
         return response()->json([
             'input' => $current->input,
             'defect' => $current->defect,
@@ -106,34 +106,36 @@ class HomeController extends Controller
     }
     public function getModel(Request $request)
     {
-        // try {
-        //     $stage = $request->input('stage');
-        //     $modelName = $request->input('model');
+        try {
+            $stage = $request->stage;
+            $modelName = $request->model;
+            $currentDate = date('Y-m-d');
+            $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
+            if ($request->model == $schedule->model)
+            {
+            $stage = DB::table('stages')
+                        ->where('schedule_id', $schedule->id)
+                        ->where('name', $stage )
+                        ->increment('input');
+            }
+            else{
+                $stage = DB::table('stages')
+                        ->where('schedule_id', $schedule->id)
+                        ->where('name', $stage )
+                        ->increment('defect');
+            }
 
-        //     $model = Model::where('stage', $stage)
-        //                  ->where('name', $modelName)
-        //                  ->first();
-
-        //     if ($model) {
-        //         // Update the stage of the model
-        //         $model->stage = 'Stage2';
-        //         $model->save();
-
-        //         return response()->json($model);
-        //     } else {
-        //         return response()->json(['error' => 'Model not found'], 404);
-        //     }
-        // } catch (\Exception $e) {
-        //     Log::error('Error in getModel: ' . $e->getMessage());
-        //     return response()->json(['error' => 'An error occurred while retrieving the model'], 500);
-        // }
+        } catch (\Exception $e) {
+            Log::error('Error in getModel: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while retrieving the model'], 500);
+        }
         return response()->json($request);
     }
     public function getData(Request $request)
     {
         try {
             $currentDate = date('Y-m-d');
-            $schedule = Schedule::where('date', $currentDate)->first();
+            $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
 
             if (!$schedule) {
                 Log::error('No schedule found for the current date.');
@@ -148,14 +150,14 @@ class HomeController extends Controller
                         ->where('schedule_id', $schedule->id)
                         ->where('name', 'Stage' . $index+1)
                         ->increment('defect');
-                        return response()->json(['index' => $index, 'item'=> $item, 'schedule_id' => $schedule->id]);
+                        
                     }
                 } elseif ($index < 10) {
                     if($item)
                     {
                     $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
-                        ->where('name', 'Stage' . $index+1)
+                        ->where('name', 'Stage2' )
                         ->increment('input');
                     }
                 } else {
@@ -163,21 +165,22 @@ class HomeController extends Controller
                     {
                     $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
-                        ->where('name', 'Stage' . $index+1)
-                        ->update(['status' =>  1]);
+                        ->where('name', 'Stage' . $index-9)
+                        ->update(['status' =>  0]);
+                       // return response()->json(['index' => $index, 'item'=> $item, 'schedule_id' => $schedule->id]);
                     }
                     else
                     {
                         $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
-                        ->where('name', 'Stage' . $index+1)
-                        ->update(['status' =>  2]);
+                        ->where('name', 'Stage' . $index-9)
+                        ->update(['status' =>  1]);
                     }
                         
                 }
             }
 
-            return response()->json($request->all());
+            return response()->json($schedule->id);
         } catch (\Exception $e) {
             Log::error('Error in getData function: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while processing the request.'], 500);

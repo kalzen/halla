@@ -25,7 +25,7 @@
                         </div>
                     </li>
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title"
-                            href="{{route('dashboard')}}">
+                            href="{{route('dashboard.index')}}">
                             <span class="lan-3">Dashboard </span></a>
                        
                     </li>
