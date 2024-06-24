@@ -12,7 +12,8 @@
 </head>
 
 <body>
-
+ 
+<input type="hidden" id="getUrl" value="{{ route('getDataStage',$stage->id) }}">
     <table class="table" border="1" id="table">
         <thead>
             <tr id="header">
@@ -25,7 +26,7 @@
         </thead>
         <tbody>
             <tr>
-                <th rowspan="6">OK</th>
+                <th class="ok" id="OK" rowspan="6">OK</th>
                 <th><span>Model</span></th>
                     
                 <th><span>Current Target</span></th>
@@ -44,7 +45,7 @@
                 <tr>
                 
                 <td><span id="defect">{{$defect}}</span></td>
-                <td class="color-progress" data-process="0"><span id="defect_rate">@php if($input) echo ($defect/$input)*100; else echo '0'; @endphp%</span></td>
+                <td class="color-defect color-change" data-process="0"><span id="defect_rate">@php if($input) echo ($defect/$input)*100; else echo '0'; @endphp%</span></td>
             
                     
                     </tr>
@@ -57,18 +58,19 @@
                 </tr>
             <tr>
             <td><span id="input">{{$input}}</span></td>
-            <td class="color-progress" data-process="0"><span id="progress">@php  echo ($input/$schedule->dayplan)*100;  @endphp%</span></td>
+            <td class="color-progress color-change" data-process="0"><span id="progress">@php  echo ($input/$schedule->dayplan)*100;  @endphp%</span></td>
             
             </tr>
         </tbody>
     </table>
+    
 </body>
 <script>
         $(document).ready(function() {
             function updateData() {
-            var stage_id = $('#stage_id').val();
+            var url_data = $('#getUrl').val();
                 $.ajax({
-                    url: "{{ route('getDataStage', ['id' => ".stage_id."]) }}",
+                    url: url_data,
                     type: "GET",
                     success: function(data) {
                         $('#input').text(data.input);
@@ -77,7 +79,19 @@
                         $('#defect_rate').text(data.defect_rate + '%');
                         $('#achive').text(data.achive + '%');
                         $('.color-progress').data('process', data.progress);
-                        //$('.status-icon[data-stage="Stage1"]').data("status",0);
+                        $('.color-defect').data('process', data.defect_rate);
+                        if (data.status)
+                        {
+                         $('#OK').text('OK');
+                         $('#OK').addClass('ok');
+                         $('#OK').removeClass('ng');
+                        }
+                        else
+                        {
+                            $('#OK').text('NG');
+                            $('#OK').addClass('ng');
+                         $('#OK').removeClass('ok');
+                        }
                     },
                     error: function(xhr, status, error) {
                         console.log('Error fetching data:', error);

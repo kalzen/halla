@@ -44,9 +44,10 @@ class HomeController extends Controller
             $defect += $stage->defect;
         }
         //return response()->json($schedule->stages);
-        if (isset($request->stage)) {
-            $stage = Stage::where('schedule_id', $schedule->id)->where('name', $request->stage);
-        }
+        
+            $stage = Stage::where('schedule_id', $schedule->id)->where('name', $request->stage)->first();
+        
+        
         return view('stage', compact('schedule', 'input', 'defect', 'stage'));
     }
     function getDataStage($id)
@@ -64,9 +65,8 @@ class HomeController extends Controller
             $defect += $stage->defect;
         }
 
-
-        $defect_rate = number_format(($current->input / ($current->input+$current->input->defect)) * 100, 2, '.', '') ;
-
+        if ($current->input+$current->defect)        $defect_rate = number_format(($current->input / ($current->input+$current->defect)) * 100, 2, '.', '') ;
+        else $defect_rate = 0;
         $progress = number_format(($input/$schedule->dayplan)*100, 2, ',', '') ;
         $achive = (number_format(($input / $schedule->target) * 100, 2, '.', '')) ;
         return response()->json([
@@ -74,7 +74,8 @@ class HomeController extends Controller
             'defect' => $current->defect,
             'progress' => $progress,
             'defect_rate' => $defect_rate,
-            'achive' => $achive
+            'achive' => $achive,
+            'status' => $current->status
         ]);
     }
     function getDataSchedule()
