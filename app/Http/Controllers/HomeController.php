@@ -65,7 +65,7 @@ class HomeController extends Controller
         }
 
 
-        $defect_rate = number_format(($current->input / $current->input+$current->input->defect) * 100, 2, '.', '') ;
+        $defect_rate = number_format(($current->input / ($current->input+$current->input->defect)) * 100, 2, '.', '') ;
 
         $progress = number_format(($input/$schedule->dayplan)*100, 2, ',', '') ;
         $achive = (number_format(($input / $schedule->target) * 100, 2, '.', '')) ;
@@ -91,7 +91,7 @@ class HomeController extends Controller
             $defect += $stage->defect;
         }
 
-        $defect_rate = number_format(($defect / $input+$defect) * 100, 2, '.', '') ;
+        $defect_rate = number_format(($defect / ($input+$defect)) * 100, 2, '.', '') ;
 
         $progress = number_format(($input/$schedule->dayplan)*100, 2, ',', '') ;
         $achive = (number_format(($input / $schedule->target) * 100, 2, '.', '')) ;
