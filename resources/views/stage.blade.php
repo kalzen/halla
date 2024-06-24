@@ -100,7 +100,7 @@
             }
 
             updateData();
-            setInterval(updateData, 2000);
+            setInterval(updateData, 500);
         });
     </script>
 </html>

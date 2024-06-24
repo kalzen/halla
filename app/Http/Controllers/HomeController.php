@@ -146,16 +146,16 @@ class HomeController extends Controller
                     {
                     $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
-                        ->where('name', 'Stage' . $index)
+                        ->where('name', 'Stage' . $index+1)
                         ->increment('defect');
-                     //   return response()->json(['index' => $index, 'item'=> $item, 'schedule_id' => $schedule->id]);
+                        return response()->json(['index' => $index, 'item'=> $item, 'schedule_id' => $schedule->id]);
                     }
                 } elseif ($index < 10) {
                     if($item)
                     {
                     $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
-                        ->where('name', 'Stage' . $index)
+                        ->where('name', 'Stage' . $index+1)
                         ->increment('input');
                     }
                 } else {
@@ -163,14 +163,14 @@ class HomeController extends Controller
                     {
                     $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
-                        ->where('name', 'Stage' . $index)
+                        ->where('name', 'Stage' . $index+1)
                         ->update(['status' =>  1]);
                     }
                     else
                     {
                         $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
-                        ->where('name', 'Stage' . $index)
+                        ->where('name', 'Stage' . $index+1)
                         ->update(['status' =>  2]);
                     }
                         
