@@ -17,7 +17,8 @@
         <thead>
             <tr id="header">
                 <th scope="col"><img style="max-height: 20vw" src="{{asset('logo.jpg')}}" alt=""></th>
-                <th scope="col" class="text-center align-items-center h-100" style="font-size: 3vw"><div style="background: #fff;">E4 CID Line</div></th>
+                <th scope="col" class="text-center align-items-center h-100 vertical-middle" style="font-size: 3vw; 
+    vertical-align: middle;"><div style="background: #fff;">E4 CID Line</div></th>
                 <th scope="col" class="text-center">Date / Time
                     <br> {{$schedule->date}}
                 </th>
