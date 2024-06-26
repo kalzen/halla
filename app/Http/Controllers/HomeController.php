@@ -108,7 +108,7 @@ class HomeController extends Controller
     }
     public function getModel(Request $request)
     {
-        try {
+        
             $stage = $request->stage;
             $modelName = Code::where('code', 'like', '%'.$request->model.'%')->first();
             $currentDate = date('Y-m-d');
@@ -128,10 +128,6 @@ class HomeController extends Controller
                         ->increment('defect');
             }
 
-        } catch (\Exception $e) {
-            Log::error('Error in getModel: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while retrieving the model'], 500);
-        }
         return response()->json($request);
     }
     public function getData(Request $request)
