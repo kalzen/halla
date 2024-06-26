@@ -155,6 +155,9 @@
 
             updateData();
             setInterval(updateData, 1000);
+            
+
         });
+
     </script>
 </html>

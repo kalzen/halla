@@ -110,7 +110,7 @@ class HomeController extends Controller
     {
         try {
             $stage = $request->stage;
-            $modelName = Code::where('code', $request->model)->first();
+            $modelName = Code::where('code', 'like', '%'.$request->model.'%')->first();
             $currentDate = date('Y-m-d');
             $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
             if ($modelName->name == $schedule->model)
@@ -124,7 +124,6 @@ class HomeController extends Controller
                 $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
                         ->where('name', $stage )
-                        ->increment('input')
                         ->increment('defect');
             }
 
