@@ -113,7 +113,8 @@ class HomeController extends Controller
             $modelName = Code::where('code', 'like', '%'.$request->model.'%')->first();
             $currentDate = date('Y-m-d');
             $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
-            if ($modelName->name == $schedule->model)
+             
+            if ($modelName && $modelName->name == $schedule->model)
             {
             $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
