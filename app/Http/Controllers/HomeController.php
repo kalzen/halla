@@ -126,7 +126,10 @@ class HomeController extends Controller
                 $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
                         ->where('name', $stage )
-                        ->increment('defect');
+                        ->incrementEach([
+                            'input' => 1,
+                            'defect' => 1,
+                        ]);
             }
 
         return response()->json($request);
