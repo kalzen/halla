@@ -180,6 +180,10 @@ class HomeController extends Controller
                         ->where('name', 'Stage' . $index-9)
                         ->update(['status' =>  1]);
                     }
+                    if ($index == 16)
+                    {
+                        return response()->json($item);
+                    }
                         
                 }
             }
