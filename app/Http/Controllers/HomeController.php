@@ -6,7 +6,7 @@ use App\Models\Schedule;
 use App\Models\Stage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\Code
+use App\Models\Code;
 use DB;
 
 class HomeController extends Controller
