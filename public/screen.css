@@ -10,10 +10,9 @@
 }
 
 body,
-#table * {
+#table *, #table-stage * {
     background: #222;
 }
-
 th {
     height: 6vh;
     text-align: center;
@@ -29,7 +28,17 @@ td {
     font-weight: bold;
     border-width: 2;
 }
+#table-stage th
+{
+    height: auto;
+    font-size: 1rem;
 
+}
+#table-stage td
+{
+    font-size: 4vh;
+    text-align: center;
+}
 #header th {
     background: #fff;
     color: #222 !important;
@@ -56,4 +65,10 @@ td {
 .color-change[data-process >= '50'] {
     color: yellow;
 }
-
+#wg
+{
+    display: block;
+    width: 100%;
+    background-size: 100% !important;
+    background-repeat: no-repeat !important;
+}

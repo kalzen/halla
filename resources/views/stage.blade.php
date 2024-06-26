@@ -11,19 +11,66 @@
 <body>
  
 <input type="hidden" id="getUrl" value="{{ route('getDataStage',$stage->id) }}">
-    <table class="table" border="1" id="table">
+<div class="container-fluid">
+
+    <div class="row">
+        
+            @if($stage->name == 'Stage1')
+            <div class="col-md-6 d-flex">
+            <div class="h-100" id="wg" style="background: url({{asset('wg-1.png')}})">
+            </div>
+            </div>
+            @elseif ($stage->name == 'Stage2')
+            <div class="col-md-6 d-flex">
+            <div class="h-100" id="wg" style="background: url({{asset('wg-2.png')}})">
+            </div>
+            </div>
+            @elseif ($stage->name == 'Stage3')
+            <div class="col-md-6 d-flex">
+            <div class="h-100" id="wg" style="background: url({{asset('wg-3.png')}})">
+            </div>
+            </div>
+            @elseif ($stage->name == 'Stage4')
+            <div class="col-md-6 d-flex">
+            <div class="h-100" id="wg" style="background: url({{asset('wg-4.png')}})">
+            </div>
+            </div>
+            @elseif ($stage->name == 'Stage5')
+            <div class="col-md-6 d-flex">
+            <div class="h-100" id="wg" style="background: url({{asset('wg-5.png')}})">
+            </div>
+            </div>
+            @endif
+        <div class="col-md-6">
+            @if($stage->name == 'Stage1')
+            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset('video/1.mp4')}}"></video>
+            <table class="table" border="1" id="table-stage">
+            @elseif ($stage->name == 'Stage2')   
+            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset('video/2.mp4')}}"></video>
+            <table class="table" border="1" id="table-stage"></table>
+            @elseif ($stage->name == 'Stage3')   
+            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset('video/2.mp4')}}"></video>
+            <table class="table" border="1" id="table-stage"></table>
+            @elseif ($stage->name == 'Stage4')   
+            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset('video/2.mp4')}}"></video>
+            <table class="table" border="1" id="table-stage"></table>
+            @elseif ($stage->name == 'Stage5')   
+            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset('video/2.mp4')}}"></video>
+            @endif
+            <table class="table" border="1" id="table-stage">
+        
         <thead>
             <tr id="header">
-                <th scope="col"><img style="max-height: 20vw" src="{{asset('logo.jpg')}}" alt=""></th>
-                <th scope="col" class="text-center align-items-center h-100" style="font-size: 3vw"><div style="background: #fff;">CHECK HOOK</div></th>
-                <th scope="col" class="text-center">Date / Time
+                <th scope="col"><img style="height: 45px" src="{{asset('logo.png')}}" alt=""></th>
+                <th scope="col" class="text-center align-items-center h-100" style="font-size: 1vw"><div style="background: #fff;">CHECK HOOK</div></th>
+                <th scope="col" class="text-center" style="font-size: 1rem !important">Date / Time
                     <br> {{$schedule->date}}
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <th class="ok" id="OK" rowspan="6">OK</th>
+                <th class="ok" id="OK" rowspan="6" style="font-size: 8rem">OK</th>
                 <th><span>Model</span></th>
                     
                 <th><span>Current Target</span></th>
@@ -60,6 +107,10 @@
             </tr>
         </tbody>
     </table>
+    </div>
+    </div>
+</div>
+    
     
 </body>
 <script>
