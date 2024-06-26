@@ -11,6 +11,7 @@
 <body>
  
 <input type="hidden" id="getUrl" value="{{ route('getDataStage',$stage->id) }}">
+<input type="hidden" id="schedule_id" value="{{$schedule->id}}">
 <div class="container-fluid">
 
     <div class="row">
@@ -117,6 +118,7 @@
         $(document).ready(function() {
             function updateData() {
             var url_data = $('#getUrl').val();
+            var schedule = $('#schedule_id').val();
                 $.ajax({
                     url: url_data,
                     type: "GET",
@@ -139,6 +141,10 @@
                             $('#OK').text('NG');
                             $('#OK').addClass('ng');
                          $('#OK').removeClass('ok');
+                        }
+                        if (data.schedule != schedule)
+                        {
+                        location.reload();
                         }
                     },
                     error: function(xhr, status, error) {

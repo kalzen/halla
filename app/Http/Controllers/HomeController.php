@@ -6,6 +6,7 @@ use App\Models\Schedule;
 use App\Models\Stage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\Code
 use DB;
 
 class HomeController extends Controller
@@ -75,7 +76,8 @@ class HomeController extends Controller
             'progress' => $progress,
             'defect_rate' => $defect_rate,
             'achive' => $achive,
-            'status' => $current->status
+            'status' => $current->status,
+            'schedule' => $schedule->id
         ]);
     }
     function getDataSchedule()
@@ -108,10 +110,10 @@ class HomeController extends Controller
     {
         try {
             $stage = $request->stage;
-            $modelName = $request->model;
+            $modelName = Code::where('code', $request->model)->first();
             $currentDate = date('Y-m-d');
             $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
-            if ($request->model == $schedule->model)
+            if ($modelName->name == $schedule->model)
             {
             $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
@@ -122,6 +124,7 @@ class HomeController extends Controller
                 $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
                         ->where('name', $stage )
+                        ->increment('input')
                         ->increment('defect');
             }
 

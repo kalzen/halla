@@ -10,7 +10,7 @@
                   <div class="card-body">
                     <div class="img-overlay">
                       <h1>Good day, Halla</h1>
-                      <p>Welcome to the Halla family! We are delighted that you have visited our dashboard.</p><a class="btn" href="index.html">Go Premium</a>
+                      <p>Welcome to the Halla family! We are delighted that you have visited our dashboard.</p>
                     </div>
                   </div>
                 </div>

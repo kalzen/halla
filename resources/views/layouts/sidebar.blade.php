@@ -34,6 +34,11 @@
                             <span class="">Schedule </span></a>
                        
                     </li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title"
+                            href="{{route('code.index')}}">
+                            <span class="">Model Code </span></a>
+                       
+                    </li>
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

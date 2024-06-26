@@ -14,4 +14,10 @@ class Schedule extends Model
     {
         return $this->hasMany(Stage::class, 'schedule_id');
     }
+    public function inputCount()
+    {
+        return $this->hasMany(Stage::class, 'schedule_id')
+        ->selectRaw('count(input) as aggregate')
+        ->groupBy('schedule_id');
+    }
 }
