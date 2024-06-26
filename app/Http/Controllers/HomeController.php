@@ -117,13 +117,13 @@ class HomeController extends Controller
              
             if ($modelName && $modelName->name == $schedule->model)
             {
-            $stage = DB::table('stages')
+                 DB::table('stages')
                         ->where('schedule_id', $schedule->id)
                         ->where('name', $stage )
                         ->increment('input');
             }
             else{
-                $stage = DB::table('stages')
+                 DB::table('stages')
                         ->where('schedule_id', $schedule->id)
                         ->where('name', $stage )
                         ->increment('defect');
