@@ -110,7 +110,8 @@ class HomeController extends Controller
     {
         
             $stage = $request->stage;
-            $modelName = Code::where('code', 'like', '%'.$request->model.'%')->first();
+            $model_code =  explode($request->model)[0];
+            $modelName = Code::where('code', 'like', '%'.$model_code.'%')->first();
             $currentDate = date('Y-m-d');
             $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
              
