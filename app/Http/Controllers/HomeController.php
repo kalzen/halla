@@ -110,7 +110,7 @@ class HomeController extends Controller
     {
         
             $stage = $request->stage;
-            $model_code =  explode($request->model)[0];
+            $model_code =  explode(' ',$request->model)[0];
             $modelName = Code::where('code', 'like', '%'.$model_code.'%')->first();
             $currentDate = date('Y-m-d');
             $schedule = Schedule::where('date', $currentDate)->orderBy('id', 'desc')->first();
@@ -133,7 +133,7 @@ class HomeController extends Controller
                         ->increment('input');
             }
 
-        return response()->json($request);
+        return response()->json($model_code);
     }
     public function getData(Request $request)
     {
