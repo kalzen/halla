@@ -83,7 +83,7 @@
                             $('#defect_rate').css('background-color', 'red');
                             $('#defect_rate').closest('td').css('background-color', 'red');
                         }
-                        else if (parseFloat(data.defect_rate) < 75)
+                        else if (parseFloat(data.defect_rate) > 25)
                         {
                             $('#defect_rate').css('background-color', 'yellow');
                             $('#defect_rate').closest('td').css('background-color', 'yellow');
