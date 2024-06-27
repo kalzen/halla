@@ -157,12 +157,25 @@ class HomeController extends Controller
                         
                     }
                 } elseif ($index < 10) {
-                    if($item)
+                    if ($index == 8)
                     {
-                    $stage = DB::table('stages')
-                        ->where('schedule_id', $schedule->id)
-                        ->where('name', 'Stage2' )
-                        ->increment('input');
+                        if($item)
+                        {
+                        $stage = DB::table('stages')
+                            ->where('schedule_id', $schedule->id)
+                            ->where('name', 'Stage2' )
+                            ->increment('input');
+                        }
+                    }
+                    if ($index == 9)
+                    {
+                        if($item)
+                        {
+                        $stage = DB::table('stages')
+                            ->where('schedule_id', $schedule->id)
+                            ->where('name', 'Stage5' )
+                            ->increment('input');
+                        }
                     }
                 } else {
                     if ($item)
