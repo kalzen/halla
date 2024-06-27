@@ -182,7 +182,7 @@ class HomeController extends Controller
                     {
                     $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
-                        ->where('name', 'Stage' . $index-10)
+                        ->where('name', 'Stage' . $index-8)
                         ->update(['status' =>  0]);
                        // return response()->json(['index' => $index, 'item'=> $item, 'schedule_id' => $schedule->id]);
                     }
@@ -190,10 +190,10 @@ class HomeController extends Controller
                     {
                         $stage = DB::table('stages')
                         ->where('schedule_id', $schedule->id)
-                        ->where('name', 'Stage' . $index-10)
+                        ->where('name', 'Stage' . $index-8)
                         ->update(['status' =>  1]);
                     }
-                    if ($index == '16')
+                    if ($index == '15')
                     {
                         return response()->json($item);
                     }
