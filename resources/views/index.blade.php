@@ -77,6 +77,54 @@
                         $('#achive').text(data.achive + '%');
                         $('.color-progress').data('process', data.progress);
                         //$('.status-icon[data-stage="Stage1"]').data("status",0);
+                        //change color defect
+                        if (parseFloat(data.defect_rate) > 75)
+                        {
+                            $('#defect_rate').css('background-color', 'red');
+                            $('#defect_rate').closest('td').css('background-color', 'red');
+                        }
+                        else if (parseFloat(data.defect_rate) < 75)
+                        {
+                            $('#defect_rate').css('background-color', 'yellow');
+                            $('#defect_rate').closest('td').css('background-color', 'yellow');
+                        }
+                        else
+                        {
+                            $('#defect_rate').css('background-color', 'green');
+                            $('#defect_rate').closest('td').css('background-color', 'green');
+                        }
+                        //change color progress
+                        if (parseFloat(data.progress) < 25)
+                        {
+                            $('#progress').css('background-color', 'red');
+                            $('#progress').closest('td').css('background-color', 'red');
+                        }
+                        else if (parseFloat(data.progress) < 75)
+                        {
+                            $('#progress').css('background-color', 'yellow');
+                            $('#progress').closest('td').css('background-color', 'yellow');
+                        }
+                        else
+                        {
+                            $('#progress').css('background-color', 'green');
+                            $('#progress').closest('td').css('background-color', 'green');
+                        }
+                        //change color achive
+                        if (parseFloat(data.achive) < 25)
+                        {
+                            $('#achive').css('background-color', 'red');
+                            $('#achive').closest('td').css('background-color', 'red');
+                        }
+                        else if (parseFloat(data.achive) < 75)
+                        {
+                            $('#achive').css('background-color', 'yellow');
+                            $('#achive').closest('td').css('background-color', 'yellow');
+                        }
+                        else
+                        {
+                            $('#achive').css('background-color', 'green');
+                            $('#achive').closest('td').css('background-color', 'green');
+                        }
                     },
                     error: function(xhr, status, error) {
                         console.log('Error fetching data:', error);
@@ -86,6 +134,7 @@
 
             updateData();
             setInterval(updateData, 500);
+
         });
     </script>
 </html>

@@ -161,17 +161,20 @@
                             $('#progress').closest('td').css('background-color', 'green');
                         }
                         //change color achive
-                        if (data.achive < 25)
+                        if (parseFloat(data.achive) < 25)
                         {
                             $('#achive').css('background-color', 'red');
+                            $('#achive').closest('td').css('background-color', 'red');
                         }
-                        else if (data.achive < 75)
+                        else if (parseFloat(data.achive) < 75)
                         {
                             $('#achive').css('background-color', 'yellow');
+                            $('#achive').closest('td').css('background-color', 'yellow');
                         }
                         else
                         {
                             $('#achive').css('background-color', 'green');
+                            $('#achive').closest('td').css('background-color', 'green');
                         }
                         if (data.status)
                         {
