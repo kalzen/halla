@@ -157,7 +157,7 @@ class HomeController extends Controller
                         
                     }
                 } elseif ($index < 10) {
-                    if ($index == '8')
+                    if ($index == '7')
                     {
                         if($item)
                         {
@@ -167,7 +167,7 @@ class HomeController extends Controller
                             ->increment('input');
                         }
                     }
-                    if ($index == '9')
+                    if ($index == '8')
                     {
                         if($item)
                         {
