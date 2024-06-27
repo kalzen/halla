@@ -128,8 +128,51 @@
                         $('#progress').text(data.progress + '%');
                         $('#defect_rate').text(data.defect_rate + '%');
                         $('#achive').text(data.achive + '%');
-                        $('.color-progress').data('process', data.progress);
-                        $('.color-defect').data('process', data.defect_rate);
+                        //change color defect
+                        if (parseFloat(data.defect_rate) > 75)
+                        {
+                            $('#defect_rate').css('background-color', 'red');
+                            $('#defect_rate').closest('td').css('background-color', 'red');
+                        }
+                        else if (parseFloat(data.defect_rate) < 75)
+                        {
+                            $('#defect_rate').css('background-color', 'yellow');
+                            $('#defect_rate').closest('td').css('background-color', 'yellow');
+                        }
+                        else
+                        {
+                            $('#defect_rate').css('background-color', 'green');
+                            $('#defect_rate').closest('td').css('background-color', 'green');
+                        }
+                        //change color progress
+                        if (parseFloat(data.progress) < 25)
+                        {
+                            $('#progress').css('background-color', 'red');
+                            $('#progress').closest('td').css('background-color', 'red');
+                        }
+                        else if (parseFloat(data.progress) < 75)
+                        {
+                            $('#progress').css('background-color', 'yellow');
+                            $('#progress').closest('td').css('background-color', 'yellow');
+                        }
+                        else
+                        {
+                            $('#progress').css('background-color', 'green');
+                            $('#progress').closest('td').css('background-color', 'green');
+                        }
+                        //change color achive
+                        if (data.achive < 25)
+                        {
+                            $('#achive').css('background-color', 'red');
+                        }
+                        else if (data.achive < 75)
+                        {
+                            $('#achive').css('background-color', 'yellow');
+                        }
+                        else
+                        {
+                            $('#achive').css('background-color', 'green');
+                        }
                         if (data.status)
                         {
                          $('#OK').text('OK');
