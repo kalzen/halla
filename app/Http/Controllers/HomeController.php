@@ -157,7 +157,7 @@ class HomeController extends Controller
                         
                     }
                 } elseif ($index < 10) {
-                    if ($index == 8)
+                    if ($index == '8')
                     {
                         if($item)
                         {
@@ -167,7 +167,7 @@ class HomeController extends Controller
                             ->increment('input');
                         }
                     }
-                    if ($index == 9)
+                    if ($index == '9')
                     {
                         if($item)
                         {
@@ -193,7 +193,7 @@ class HomeController extends Controller
                         ->where('name', 'Stage' . $index-9)
                         ->update(['status' =>  1]);
                     }
-                    if ($index == 16)
+                    if ($index == '16')
                     {
                         return response()->json($item);
                     }
