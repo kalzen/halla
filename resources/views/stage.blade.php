@@ -62,7 +62,7 @@
         
         <thead>
             <tr id="header">
-                <th scope="col"><img style="height: 45px" src="{{asset('logo.png')}}" alt=""></th>
+                <th scope="col" class="align-middle"><img style="height: 45px" src="{{asset('logo.png')}}" alt=""></th>
                 <th scope="col" class="text-center align-items-center h-100" style="font-size: 1vw"><div style="background: #fff;">{{$stage->name}}</div></th>
                 <th scope="col" class="text-center" style="font-size: 1rem !important">Date / Time
                     <br> {{$schedule->date}}
