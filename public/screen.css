@@ -36,7 +36,7 @@ td {
 }
 #table-stage td
 {
-    font-size: 4vh;
+    font-size: 2rem;
     text-align: center;
 }
 #header th {
@@ -72,3 +72,19 @@ td {
     background-size: 100% !important;
     background-repeat: no-repeat !important;
 }
+.grid-fluid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 60% 40%;
+    width: 100vw;
+    height: 100vh;
+  }
+.grid-item video
+{
+    max-height: 100%;
+}
+.grid-item{
+    justify-content: center;
+    display: flex;
+}
+  

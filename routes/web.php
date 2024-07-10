@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ScheduleController;
@@ -23,6 +24,9 @@ Route::get('/schedule/create', [ScheduleController::class, 'create'])->middlewar
 Route::get('/code', [CodeController::class, 'index'])->middleware(['auth', 'verified'])->name('code.index');
 Route::post('/code/store', [CodeController::class, 'store'])->middleware(['auth', 'verified'])->name('code.store');
 Route::get('/code/create', [CodeController::class, 'create'])->middleware(['auth', 'verified'])->name('code.create');
+Route::get('/setting', [SettingController::class, 'index'])->middleware(['auth', 'verified'])->name('setting.index');
+Route::get('/setting/edit/{id}', [SettingController::class, 'edit'])->middleware(['auth', 'verified'])->name('setting.edit');
+Route::post('/setting/edit', [SettingController::class, 'update'])->middleware(['auth', 'verified'])->name('setting.update');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

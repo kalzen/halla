@@ -51,7 +51,24 @@
       },
     };
   })();
-
+  Dropzone.options.dropzone =
+        {
+            maxFilesize: 10,
+            renameFile: function (file) {
+                var dt = new Date();
+                var time = dt.getTime();
+                return time + file.name;
+            },
+            acceptedFiles: ".jpeg,.jpg,.png,.gif,.mp4",
+            addRemoveLinks: true,
+            timeout: 60000,
+            success: function (file, response) {
+                console.log(response);
+            },
+            error: function (file, response) {
+                return false;
+            }
+        };
   DropzoneExample.init();
 
   // Only pics upload with animation
@@ -70,7 +87,7 @@
       $(".imgupload.stop").show("slow");
 
       $("#namefile").css({ color: "#FC4438", "font-weight": 700 });
-      $("#namefile").html("File " + filename + " is not  pic!");
+      $("#namefile").html("File " + filename + " is not  pic!"); 
 
       $("#submitbtn").hide();
       $("#fakebtn").show();

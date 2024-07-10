@@ -7,6 +7,7 @@ use ArrayIterator;
 use Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
 use Illuminate\Support\Traits\EnumeratesValues;
 use Illuminate\Support\Traits\Macroable;
+use InvalidArgumentException;
 use stdClass;
 use Traversable;
 
@@ -662,6 +663,10 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     /**
      * Determine if the collection is empty or not.
      *
+     * @phpstan-assert-if-true null $this->first()
+     *
+     * @phpstan-assert-if-false !null $this->first()
+     *
      * @return bool
      */
     public function isEmpty()
@@ -828,6 +833,23 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
     public function mergeRecursive($items)
     {
         return new static(array_merge_recursive($this->items, $this->getArrayableItems($items)));
+    }
+
+    /**
+     * Multiply the items in the collection by the multiplier.
+     *
+     * @param  int  $multiplier
+     * @return static
+     */
+    public function multiply(int $multiplier)
+    {
+        $new = new static;
+
+        for ($i = 0; $i < $multiplier; $i++) {
+            $new->push(...$this->items);
+        }
+
+        return $new;
     }
 
     /**
@@ -1128,13 +1150,13 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
             return null;
         }
 
-        $position = $this->keys()->search($key);
+        $position = ($keys = $this->keys())->search($key);
 
         if ($position === 0) {
             return null;
         }
 
-        return $this->get($this->keys()->get($position - 1));
+        return $this->get($keys->get($position - 1));
     }
 
     /**
@@ -1152,13 +1174,13 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
             return null;
         }
 
-        $position = $this->keys()->search($key);
+        $position = ($keys = $this->keys())->search($key);
 
-        if ($position === $this->keys()->count() - 1) {
+        if ($position === $keys->count() - 1) {
             return null;
         }
 
-        return $this->get($this->keys()->get($position + 1));
+        return $this->get($keys->get($position + 1));
     }
 
     /**
@@ -1166,15 +1188,25 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
      *
      * @param  int  $count
      * @return static<int, TValue>|TValue|null
+     *
+     * @throws \InvalidArgumentException
      */
     public function shift($count = 1)
     {
-        if ($count === 1) {
-            return array_shift($this->items);
+        if ($count < 0) {
+            throw new InvalidArgumentException('Number of shifted items may not be less than zero.');
         }
 
         if ($this->isEmpty()) {
+            return null;
+        }
+
+        if ($count === 0) {
             return new static;
+        }
+
+        if ($count === 1) {
+            return array_shift($this->items);
         }
 
         $results = [];
