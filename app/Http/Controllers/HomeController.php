@@ -7,6 +7,7 @@ use App\Models\Stage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Code;
+use App\Models\Setting;
 use DB;
 
 class HomeController extends Controller
@@ -47,9 +48,9 @@ class HomeController extends Controller
         //return response()->json($schedule->stages);
         
             $stage = Stage::where('schedule_id', $schedule->id)->where('name', $request->stage)->first();
-        
-        
-        return view('stage', compact('schedule', 'input', 'defect', 'stage'));
+        $image = Setting::where('name', $request->stage)->where('type', 'image')->first();
+        $video = Setting::where('name', $request->stage)->where('type', 'video')->first();
+        return view('stage', compact('schedule', 'input', 'defect', 'stage','image', 'video'));
     }
     function getDataStage($id)
     {

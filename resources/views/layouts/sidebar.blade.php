@@ -39,6 +39,11 @@
                             <span class="">Model Code </span></a>
                        
                     </li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title"
+                            href="{{route('setting.index')}}">
+                            <span class="">Settings </span></a>
+                       
+                    </li>
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

@@ -79,7 +79,7 @@
     var filename = arr.slice(-1)[0];
     filextension = filename.split(".");
     filext = "." + filextension.slice(-1)[0];
-    valid = [".jpg", ".png", ".jpeg", ".bmp"];
+    valid = [".jpg", ".png", ".jpeg", ".bmp", ".mp4"];
     //if file is not valid we show the error icon, the red alert, and hide the submit button
     if (valid.indexOf(filext.toLowerCase()) == -1) {
       $(".imgupload").hide("slow");

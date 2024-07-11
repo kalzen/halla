@@ -15,32 +15,12 @@
 <div class="grid-fluid">
 
         
-            @if($stage->name == 'Stage1')
+            
             <div class="grid-item d-flex">
-            <img src="{{asset('wg-1.png')}}">
+            <img src="{{asset($image->value)}}">
             </img>
             </div>
-            @elseif ($stage->name == 'Stage2')
-            <div class="grid-item d-flex">
-            <div class="h-100" id="wg" style="background: url({{asset('wg-2.png')}})">
-            </div>
-            </div>
-            @elseif ($stage->name == 'Stage3')
-            <div class="grid-item d-flex">
-            <div class="h-100" id="wg" style="background: url({{asset('wg-3.png')}})">
-            </div>
-            </div>
-            @elseif ($stage->name == 'Stage4')
-            <div class="grid-item d-flex">
-            <div class="h-100" id="wg" style="background: url({{asset('wg-4.png')}})">
-            </div>
-            </div>
-            @elseif ($stage->name == 'Stage5')
-            <div class="grid-item d-flex">
-            <div class="h-100" id="wg" style="background: url({{asset('wg-5.png')}})">
-            </div>
-            </div>
-            @endif
+            
         <div class="grid-item"></div>
         <div class="grid-item">
             @if($stage->name == 'Stage1')

@@ -31,8 +31,8 @@
                         <div class="valid-tooltip">Looks good!</div>
                       </div>
                       <div class="col-md-4 position-relative mt-4">
-                        <label class="form-label" for="validationTooltip03">UHP</label>
-                        <input class="form-control" id="validationTooltip03" type="text" name="uhp" required="">
+                        <label class="form-label" for="validationTooltip03">Target</label>
+                        <input class="form-control" id="validationTooltip03" type="text" name="target" required="">
                         <div class="valid-tooltip">Looks good!</div>
                       </div>
                       <div class="col-12 mt-4">
