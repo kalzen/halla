@@ -37,7 +37,7 @@
                    <td> <span>{{$schedule->target}}</span></td>
                 </tr>
             <tr class="title">
-                <th><span>UPH</span></th>
+                <th><span id="uhp">UPH</span></th>
                     
                 <th><span>Defect</span></th>
                     
@@ -72,6 +72,7 @@
                     success: function(data) {
                         $('#input').text(data.input);
                         $('#defect').text(data.defect);
+                        $('#uhp').text(data.uhp);
                         $('#progress').text(data.progress + '%');
                         $('#defect_rate').text(data.defect_rate + '%');
                         $('#achive').text(data.achive + '%');

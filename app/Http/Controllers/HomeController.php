@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Code;
 use App\Models\Setting;
 use DB;
-
+use Carbon\Carbon;
 class HomeController extends Controller
 {
 
@@ -94,7 +94,8 @@ class HomeController extends Controller
             $input += $stage->input;
             $defect += $stage->defect;
         }
-
+        $hour = Carbon::parse($schedule->created_at)->diffInHours(Carbon::now());        
+        $uhp = number_format($input / $hour);
         $defect_rate = number_format(($defect / ($input+$defect)) * 100, 2, '.', '') ;
 
         $progress = number_format(($input/$schedule->dayplan)*100, 2, ',', '') ;
@@ -104,7 +105,8 @@ class HomeController extends Controller
             'defect' => $defect,
             'progress' => $progress,
             'defect_rate' => $defect_rate,
-            'achive' => $achive
+            'achive' => $achive, 
+            'uhp' => $uhp
         ]);
     }
     public function getModel(Request $request)
