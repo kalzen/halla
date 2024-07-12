@@ -12,7 +12,7 @@
  
 <input type="hidden" id="getUrl" value="{{ route('getDataStage',$stage->id) }}">
 <input type="hidden" id="schedule_id" value="{{$schedule->id}}">
-<div class="grid-fluid">
+<div class="grid-fluid @if ($stage->name == 'Stage1' || $stage->name == 'Stage2' || $stage->name == 'Stage5') grid-fluid-2 @endif">
 
         
             
@@ -20,7 +20,7 @@
             <img src="{{asset($image->value)}}">
             </img>
             </div>
-            
+        
         <div class="grid-item"></div>
         <div class="grid-item">
             @if($stage->name == 'Stage1')
