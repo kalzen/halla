@@ -94,7 +94,11 @@ class HomeController extends Controller
             $input += $stage->input;
             $defect += $stage->defect;
         }
-        $hour = Carbon::parse($schedule->created_at)->diffInHours(Carbon::now());        
+        $hour = Carbon::parse($schedule->created_at)->diffInHours(Carbon::now());   
+        if ($hour == 0)
+        {
+            $hour = 1;
+        }     
         $uhp = number_format($input / $hour);
         $defect_rate = number_format(($defect / ($input+$defect)) * 100, 2, '.', '') ;
 

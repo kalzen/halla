@@ -37,14 +37,14 @@
                    <td> <span>{{$schedule->target}}</span></td>
                 </tr>
             <tr class="title">
-                <th><span id="uhp">UPH</span></th>
+                <th><span >UPH</span></th>
                     
                 <th><span>Defect</span></th>
                     
                 <th><span>Current Input</span></th>
                 </tr>
                 <tr>
-                <td><span>{{$schedule->uhp}}</span></td>
+                <td><span id="uhp">{{$schedule->uhp}}</span></td>
                 <td><span id="defect">{{$defect}}</span></td>
                     <td><span id="input">{{$input}}</span></td>
                     </tr>
