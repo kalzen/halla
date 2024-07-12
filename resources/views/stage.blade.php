@@ -12,31 +12,26 @@
  
 <input type="hidden" id="getUrl" value="{{ route('getDataStage',$stage->id) }}">
 <input type="hidden" id="schedule_id" value="{{$schedule->id}}">
-<div class="grid-fluid @if ($stage->name == 'Stage1' || $stage->name == 'Stage2' || $stage->name == 'Stage5') grid-fluid-2 @endif">
+<div class="container-fluid @if ($stage->name != 'Stage1' && $stage->name != 'Stage2' && $stage->name != 'Stage5')grid-fluid @else not-grid @endif">
 
         
-            
+        @if ($stage->name == 'Stage1' || $stage->name == 'Stage2' || $stage->name == 'Stage5')
+        <div class="row">
+        <div class="col-md-6">
+            @endif
             <div class="grid-item d-flex">
             <img src="{{asset($image->value)}}">
             </img>
             </div>
-        
+            @if ($stage->name != 'Stage1' && $stage->name != 'Stage2' && $stage->name != 'Stage5')
         <div class="grid-item"></div>
+        @endif
+        @if ($stage->name == 'Stage1' || $stage->name == 'Stage2' || $stage->name == 'Stage5')
+        </div><div class="col-md-6">
+            @endif
         <div class="grid-item">
-            @if($stage->name == 'Stage1')
-            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset('video/1.mp4')}}"></video>
-            
-            @elseif ($stage->name == 'Stage2')   
-            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset('video/2.mp4')}}"></video>
-            
-            @elseif ($stage->name == 'Stage3')   
-            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset('video/2.mp4')}}"></video>
-            
-            @elseif ($stage->name == 'Stage4')   
-            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset('video/2.mp4')}}"></video>
-            
-            @elseif ($stage->name == 'Stage5')   
-            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset('video/2.mp4')}}"></video>
+            @if($video->value)
+            <video loop autoplay controls muted style="max-width: 100%; height: 42vh" src="{{asset($video->value)}}"></video>
             @endif
         </div>
         <div class="grid-item">
@@ -91,6 +86,10 @@
             </tbody>
             </table>
         </div>
+        @if ($stage->name == 'Stage1' || $stage->name == 'Stage2' || $stage->name == 'Stage5')
+        </div>
+        </div>
+            @endif
     </div>
 </div>
     

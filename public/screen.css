@@ -79,13 +79,6 @@ td {
     width: 100vw;
     height: 100vh;
   }
-  .grid-fluid-2 {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
-    width: 100vw;
-    height: 100vh;
-  }
 .grid-item video
 {
     max-height: 100%;
@@ -94,4 +87,20 @@ td {
     justify-content: center;
     display: flex;
 }
+
+  .not-grid   .grid-item:first-child img{
+    height: 100vh;
+    width: 50vw;
+    object-fit:contain
+  }
+  
+  .not-grid .grid-item:nth-child(2)
+ {
+
+    height: 50vh;
+  }
+  .not-grid  .grid-item:nth-child(3) {
+
+    height: 50vh;
+  }
   

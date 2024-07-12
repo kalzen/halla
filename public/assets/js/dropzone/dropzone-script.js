@@ -9,6 +9,7 @@
         maxFiles: 1,
         maxFilesize: 5,
         addRemoveLinks: true,
+        acceptedFiles: ".jpeg,.jpg,.png,.gif,.mp4",
         accept: function (file, done) {
           if (file.name == "justinbieber.jpg") {
             done("Naha, you don't.");
@@ -33,7 +34,7 @@
       Dropzone.options.fileTypeValidation = {
         paramName: "file",
         maxFiles: 10,
-        maxFilesize: 10,
+        maxFilesize: 100,
         addRemoveLinks: true,
         acceptedFiles: "image/*,application/pdf,.psd",
         accept: function (file, done) {
@@ -53,7 +54,7 @@
   })();
   Dropzone.options.dropzone =
         {
-            maxFilesize: 10,
+            maxFilesize: 100,
             renameFile: function (file) {
                 var dt = new Date();
                 var time = dt.getTime();

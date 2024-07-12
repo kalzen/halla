@@ -22,7 +22,7 @@
                         {{ session('error') }}
                     </div>
                   @endif
-                  <form class="dropzone" id="dropzone" enctype="multipart/form-data" id="singleFileUpload" action="{{route('setting.update')}}" method="post">
+                  <form class="dropzone" id="dropzone" enctype="multipart/form-data" action="{{route('setting.update')}}" method="post">
                   @csrf
                   <input type="hidden" name="setting_id" value="{{ $setting->id }}">
                       <div class="m-0 dz-message needsclick"><i class="icon-cloud-up"></i>
