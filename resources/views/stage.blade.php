@@ -118,7 +118,7 @@
                         else if (parseFloat(data.defect_rate) > 25)
                         {
                             $('#defect_rate').css('background-color', 'yellow');
-                            $('#defect_rate').closest('td').css('background-color', 'yellow');
+                            $('#defect_rate').closest('td').css('background-color', '#f1c40f');
                         }
                         else
                         {
@@ -134,7 +134,7 @@
                         else if (parseFloat(data.progress) < 75)
                         {
                             $('#progress').css('background-color', 'yellow');
-                            $('#progress').closest('td').css('background-color', 'yellow');
+                            $('#progress').closest('td').css('background-color', '#f1c40f');
                         }
                         else
                         {
@@ -150,7 +150,7 @@
                         else if (parseFloat(data.achive) < 75)
                         {
                             $('#achive').css('background-color', 'yellow');
-                            $('#achive').closest('td').css('background-color', 'yellow');
+                            $('#achive').closest('td').css('background-color', '#f1c40f');
                         }
                         else
                         {
